@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Hasana Taqseem">
+    <title>Hasana Taqseem | Intelligent Finance</title>
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #064e3b;
+            --primary-light: #059669;
+            --accent-color: #d97706;
+            --text-color: #f0fdf4;
+            --text-secondary: #a7f3d0;
+            --bg-gradient-start: #022c22;
+            --bg-gradient-end: #064e3b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --danger-color: #ef4444;
+            --input-bg: rgba(0, 0, 0, 0.2);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --spacing-md: 1.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation;
+        }
+
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .logo-container h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #a7f3d0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .controls-row {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .language-selector select,
+        .currency-selector select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .language-selector select:hover,
+        .currency-selector select:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .language-selector select option,
+        .currency-selector select option {
+            background: #022c22;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+
+            .language-selector select,
+            .currency-selector select {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.95rem;
+                min-height: 44px;
+            }
+        }
+
+        .header-nudge {
+            margin-top: 1rem;
+            display: inline-block;
+            background: rgba(217, 119, 6, 0.2);
+            color: #fbbf24;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-style: italic;
+            border: 1px solid rgba(217, 119, 6, 0.3);
+        }
+
+        .quick-guide {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quick-guide p {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            color: var(--text-color);
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1rem 1rem 2.5rem;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            min-height: 48px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 4px rgba(6, 78, 59, 0.3);
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        .tip {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .half {
+            flex: 1;
+        }
+
+        .primary-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--primary-light), #10b981);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            margin-top: 1rem;
+            min-height: 56px;
+            touch-action: manipulation;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .primary-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .section-divider span {
+            background: var(--bg-gradient-end);
+            padding: 0 1rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.6), rgba(5, 150, 105, 0.3));
+            border: 1px solid var(--primary-light);
+            text-align: center;
+        }
+
+        .big-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 1rem 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .medium-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sub-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .asset-advice {
+            text-align: center;
+            border-color: var(--accent-color);
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 5px;
+            transition: width 1s ease-out;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1rem;
+            text-align: left;
+        }
+
+        .main-footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .main-footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .main-footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        html[dir="rtl"] {
+            font-family: 'Noto Nastaliq Urdu', 'Outfit', sans-serif;
+        }
+
+        html[dir="rtl"] .card-header {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .controls-row {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .input-wrapper {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .currency-symbol {
+            left: auto;
+            right: 1rem;
+        }
+
+        html[dir="rtl"] input[type="number"] {
+            padding: 1rem 2.5rem 1rem 1rem;
+        }
+
+        html[dir="rtl"] .quote {
+            border-left: none;
+            border-right: 3px solid var(--accent-color);
+            padding-left: 0;
+            padding-right: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo-container">
+                <h1>Hasana Taqseem</h1>
+                <p class="subtitle" data-i18n="subtitle">Wealth is a mindset, not just a number.</p>
+                <div class="controls-row">
+                    <div class="language-selector">
+                        <select id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="ur">اردو</option>
+                            <option value="hi">हिन्दी</option>
+                        </select>
+                    </div>
+                    <div class="currency-selector">
+                        <select id="currencySelect">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="PKR">PKR (₨)</option>
+                            <option value="INR">INR (₹)</option>
+                            <option value="AED">AED (د.إ)</option>
+                            <option value="SAR">SAR (﷼)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nudge" id="headerNudge" data-i18n="nudge-default">
+                "Pay yourself first."
+            </div>
+        </header>
+
+        <div class="quick-guide">
+            <p data-i18n="guide-text">💡 Enter your income and expenses below, then click "Analyze" to get personalized
+                financial advice.</p>
+        </div>
+
+        <main>
+            <section class="card input-section fade-in">
+                <div class="card-header">
+                    <h2 data-i18n="section-foundation">The Foundation</h2>
+                    <span class="icon">🏛️</span>
+                </div>
+                <div class="input-group">
+                    <label for="salary" data-i18n="label-salary">Monthly Income (Salary)</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="salary" placeholder="0.00" min="0">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="fixedExpenses" data-i18n="label-fixed">Fixed Expenses (Rent, Bills,
+                        Subscriptions)</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="fixedExpenses" placeholder="0.00" min="0">
+                    </div>
+                    <small class="tip" data-i18n="tip-asset">Is that subscription an asset or a liability?</small>
+                </div>
+            </section>
+
+            <section class="card input-section fade-in" style="animation-delay: 0.1s;">
+                <div class="card-header">
+                    <h2 data-i18n="section-habits">Daily Habits</h2>
+                    <span class="icon">☕</span>
+                </div>
+                <div class="input-group">
+                    <label for="dailyExpenses" data-i18n="label-daily">Estimated Daily Spending (Food,
+                        Transport)</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="dailyExpenses" placeholder="0.00" min="0">
+                    </div>
+                </div>
+            </section>
+
+            <section class="card input-section fade-in" style="animation-delay: 0.2s;">
+                <div class="card-header">
+                    <h2 data-i18n="section-future">The Past & The Future</h2>
+                    <span class="icon">⚖️</span>
+                </div>
+                <div class="row">
+                    <div class="input-group half">
+                        <label for="debts" data-i18n="label-debts">Total Debts</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="debts" placeholder="0.00" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group half">
+                        <label for="savingsGoal" data-i18n="label-goal">Savings Goal</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="savingsGoal" placeholder="0.00" min="0">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button id="calculateBtn" class="primary-btn" data-i18n="btn-analyze">Analyze My Finances</button>
+
+            <div id="dashboard" class="dashboard hidden">
+                <div class="section-divider">
+                    <span data-i18n="result-complete">Analysis Complete</span>
+                </div>
+
+                <div class="card result-card highlight-card">
+                    <h3 data-i18n="result-pay-first">Pay Yourself First</h3>
+                    <div class="big-number" id="savingsSuggestion">$0</div>
+                    <p class="desc" data-i18n="result-pay-desc">Before bills, before food. This is for your freedom.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="card result-card">
+                        <h4 data-i18n="result-safe-spend">Safe to Spend</h4>
+                        <div class="medium-number" id="safeSpend">$0</div>
+                        <p class="sub-text" data-i18n="result-after-savings">After savings & bills</p>
+                    </div>
+
+                    <div class="card result-card">
+                        <h4 data-i18n="result-safety-net">Safety Net Target</h4>
+                        <div class="medium-number" id="emergencyTarget">$0</div>
+                        <p class="sub-text" data-i18n="result-6-months">6 Months of Expenses</p>
+                    </div>
+                </div>
+
+                <div class="card result-card asset-advice">
+                    <h3 data-i18n="result-wealth">Wealth Allocator</h3>
+                    <p id="assetStrategy">Loading strategy...</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="wealthBar" style="width: 0%"></div>
+                    </div>
+                    <p class="quote" id="dynamicQuote">"Rich people acquire assets. The poor and middle class acquire
+                        liabilities that they think are assets."</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p data-i18n="footer-built">Built with discipline.</p>
+            <p><a href="mailto:asimgirani@.com">asimgirani@.com</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
